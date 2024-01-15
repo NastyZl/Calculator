@@ -1,4 +1,4 @@
-package org.example.handlers;
+package org.example.services;
 
 import org.example.models.Lexeme;
 import org.example.models.LexemeType;
