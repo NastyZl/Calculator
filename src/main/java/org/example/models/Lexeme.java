@@ -1,8 +1,8 @@
 package org.example.models;
 
 public class Lexeme {
-    LexemeType type;
-    String value;
+    private final LexemeType type;
+    private final String value;
 
     public Lexeme(LexemeType type, String value) {
         this.type = type;

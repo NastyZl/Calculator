@@ -7,16 +7,17 @@ import java.util.function.BinaryOperator;
 
 public class RecursiveCalculation {
     BinaryOperator<Double> binaryOperator;
-    public double factor(LexemeBuffer lexemes){
+
+    public double factor(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
-        switch (lexeme.getType()){
+        switch (lexeme.getType()) {
             case MINUS:
-                double value = factor(lexemes);
-                return -value;
+                double valueUnaryMinus = factor(lexemes);
+                return -valueUnaryMinus;
             case NUMBER:
                 return Double.parseDouble(lexeme.getValue());
             case OPEN_BRACKET:
-                value = expr(lexemes);
+                double value = expr(lexemes);
                 lexeme = lexemes.next();
                 if (lexeme.getType() != LexemeType.CLOSE_BRACKET) {
                     throw new RuntimeException("Unexpected token " + lexeme.getValue() + " at position " + lexemes.getPosition());
@@ -27,11 +28,12 @@ public class RecursiveCalculation {
             }
         }
     }
-    public double plusMinus(LexemeBuffer lexemes){
+
+    public double plusMinus(LexemeBuffer lexemes) {
         double value = mulDiv(lexemes);
         while (true) {
             Lexeme lexeme = lexemes.next();
-            if (lexeme.getType() == LexemeType.PLUS || lexeme.getType() == LexemeType.MINUS){
+            if (lexeme.getType() == LexemeType.PLUS || lexeme.getType() == LexemeType.MINUS) {
                 lambdaOperations(lexeme.getType());
                 value = binaryOperator.apply(value, mulDiv(lexemes));
             } else {
@@ -40,11 +42,12 @@ public class RecursiveCalculation {
             }
         }
     }
-    public double mulDiv(LexemeBuffer lexemes){
+
+    public double mulDiv(LexemeBuffer lexemes) {
         double value = factor(lexemes);
         while (true) {
             Lexeme lexeme = lexemes.next();
-            if (lexeme.getType() == LexemeType.MULTIPLY || lexeme.getType() == LexemeType.DIVIDE){
+            if (lexeme.getType() == LexemeType.MULTIPLY || lexeme.getType() == LexemeType.DIVIDE) {
                 lambdaOperations(lexeme.getType());
                 value = binaryOperator.apply(value, factor(lexemes));
             } else {
@@ -53,9 +56,10 @@ public class RecursiveCalculation {
             }
         }
     }
-    public double expr(LexemeBuffer lexemes){
+
+    public double expr(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
-        if (lexeme.getType() == LexemeType.EOF){
+        if (lexeme.getType() == LexemeType.EOF) {
             return 0;
         } else {
             lexemes.back();

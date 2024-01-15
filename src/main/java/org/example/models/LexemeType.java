@@ -5,7 +5,8 @@ public enum LexemeType {
     PLUS("+"), MINUS("-"),
     MULTIPLY("*"), DIVIDE("/"),
     NUMBER("1"),
-    EOF("");
+    EOF(""),
+    UNKNOWN("");
 
     private final String value;
 
