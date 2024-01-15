@@ -6,7 +6,7 @@ import org.example.models.LexemeType;
 import java.util.function.BinaryOperator;
 
 public class RecursiveCalculation {
-    BinaryOperator<Double> binaryOperator;
+    private BinaryOperator<Double> binaryOperator;
 
     public double factor(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
