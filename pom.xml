@@ -50,6 +50,7 @@
           <target>9</target>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 </project>
